@@ -1,24 +1,16 @@
-
-# coding: utf-8
-
-# In[4]:
-
-print(__doc__)
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 
-n_neighbors = 15
+n_neighbors = 7
 
 # import some data to play with
-iris = datasets.load_iris()
+wine = datasets.load_wine()
 
-# we only take the first two features. We could avoid this ugly
-# slicing by using a two-dim dataset
-X = iris.data[:, :2]
-y = iris.target
+#take the first two features
+X = wine.data[:, :2]
+y = wine.target
 
 h = .02  # step size in the mesh
 
@@ -53,14 +45,3 @@ for weights in ['uniform', 'distance']:
               % (n_neighbors, weights))
 
 plt.show()
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
