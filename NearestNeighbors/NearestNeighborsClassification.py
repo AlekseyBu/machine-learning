@@ -25,9 +25,6 @@ y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                      np.arange(y_min, y_max, h))
 
-#for weights in ['uniform', 'distance']:
-    # we create an instance of Neighbours Classifier and fit the data.
-    #clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights,algorithm='ball_tree')
 for algorithm in ['brute', 'ball_tree', 'kd_tree']:
     for weights in ['uniform', 'distance']:
         cv_scores = []
@@ -39,9 +36,7 @@ for algorithm in ['brute', 'ball_tree', 'kd_tree']:
             scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
             cv_scores.append(scores.mean())
         # changing to misclassification error
-
         MSE = [1 - x for x in cv_scores]
-
         # determining best k
         optimal_k = Kvalues[MSE.index(min(MSE))]
         print("The optimal number of neighbors for algorithm = '%s' and weights = '%s' is %d" 
@@ -51,8 +46,7 @@ for algorithm in ['brute', 'ball_tree', 'kd_tree']:
 #         plt.plot(Kvalues, MSE)
 #         plt.xlabel('Number of Neighbors K')
 #         plt.ylabel('Misclassification Error')
-        
-        
+      
         kNN = neighbors.KNeighborsClassifier(n_neighbors = optimal_k, 
                                              weights=weights,
                                              algorithm=algorithm)
