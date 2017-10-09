@@ -9,16 +9,16 @@
 Такой подход позволяет учитывать большее число факторов при классификации.
 
 
-######Пример работы алгоритма **FRiS-STOLP**:
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/iris_05_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/iris_07_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/iris_09_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_05_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_07_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_09_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_05_02.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_07_02.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/wine_09_02.png)
+###### Пример работы алгоритма **FRiS-STOLP**:
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_05_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_07_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_09_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_09_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_02.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_02.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_09_02.png)
 
 Алгоритм FRiS-STOLP создаёт в процессе работы сокращенное описание обучающей выборки. Это позволяет сократить расход памяти, избавиться от ошибок и выбросов, содержащихся в ней, но при этом сохранить информацию, необходимую для дальнейшего распознавания новых объектов.
 
