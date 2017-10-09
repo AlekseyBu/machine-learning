@@ -30,8 +30,11 @@ KNeighborsClassifier (k - целое, число соседей)
 RadiusNeighborsClassifier (r - действительное число, радиус) - в случае неравномерно распределенных данных
 
 ###### ѕример применени€ KNeighborsClassifier дл€ выборки "Wine":
-![ арта классификации дл€ случа€, когда все точки имеют одинаковый вес](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_uniform.png) 
-![ арта классификации в случае, когда весова€ ф-€ - убывающа€ последовательность вещественных весов](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_distance.png)
+
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_uniform.png) 
+* арта классификации дл€ случа€, когда все точки имеют одинаковый вес*
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_distance.png)
+* арта классификации в случае, когда весова€ ф-€ - убывающа€ последовательность вещественных весов*
 
 √рафик зависимости ошибочной классификации в зависимости от значени€ k:
 
