@@ -31,15 +31,24 @@ RadiusNeighborsClassifier (r - действительное число, радиус) - в случае неравном
 
 ###### Пример применения KNeighborsClassifier для выборки "Wine":
 
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_uniform.png) 
-*Карта классификации для случая, когда все точки имеют одинаковый вес*
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_distance.png)
-*Карта классификации в случае, когда весовая ф-я - убывающая последовательность вещественных весов*
-
-График зависимости ошибочной классификации в зависимости от значения k:
+<figure>
+  <img src="https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_uniform.png" alt="uniform"/>
+  <figcaption>Карта классификации для случая, когда все точки имеют одинаковый вес</figcaption>
+</figure>
 
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/mse_uniform.png) 
+
+График зависимости ошибочной классификации в зависимости от значения k
+
+<figure>
+  <img src="https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_distance.png" alt="distance"/>
+  <figcaption>Карта классификации в случае, когда весовая ф-я - убывающая последовательность вещественных весов</figcaption>
+</figure> 
+
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/mse_distance.png)
+
+График зависимости ошибочной классификации в зависимости от значения k
+
 
 ## KNeighborsClassifier
 
