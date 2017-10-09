@@ -30,11 +30,13 @@ KNeighborsClassifier (k - целое, число соседей)
 RadiusNeighborsClassifier (r - действительное число, радиус) - в случае неравномерно распределенных данных
 
 ###### ѕример применени€ KNeighborsClassifier дл€ выборки "Wine":
-![ арта классификации дл€ случа€, когда все точки имеют одинаковый вес](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/knn_uniform.png) ![ арта классификации в случае, когда весова€ ф-€ - убывающа€ последовательность вещественных весов](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/knn_distance.png)
+![ арта классификации дл€ случа€, когда все точки имеют одинаковый вес](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_uniform.png) 
+![ арта классификации в случае, когда весова€ ф-€ - убывающа€ последовательность вещественных весов](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/knn_distance.png)
 
 √рафик зависимости ошибочной классификации в зависимости от значени€ k:
 
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/mse_uniform.png) ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/mse_distance.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/mse_uniform.png) 
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/NearestNeighbors/img/mse_distance.png)
 
 ## KNeighborsClassifier
 
