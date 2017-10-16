@@ -22,4 +22,7 @@
 
 Алгоритм FRiS-STOLP создаёт в процессе работы сокращенное описание обучающей выборки. Это позволяет сократить расход памяти, избавиться от ошибок и выбросов, содержащихся в ней, но при этом сохранить информацию, необходимую для дальнейшего распознавания новых объектов.
 
+**Карта классификации для всей выборки ирисы Фишера (первый рисунок) и для эталонных объектов (нижний рисунок)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/knn_all.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/knn_etalon.png)
 
