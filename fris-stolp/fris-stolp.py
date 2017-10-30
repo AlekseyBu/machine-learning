@@ -1,28 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 from sklearn.neighbors import NearestNeighbors
 from scipy.spatial import distance
 
-# iris = datasets.load_iris()
-# # take two features
-# X = iris.data[:, [2,3]]
-# y = iris.target
 
-wine = datasets.load_wine()
-# take the first two features
-X = wine.data[:, [6,9]]
-y = wine.target
+iris = datasets.load_iris()
+# take two features
+X = iris.data[:, [2, 3]]
+y = iris.target
+
+# wine = datasets.load_wine()
+# # take the first two features
+# # X = wine.data[:, [6,9]]
+# X = wine.data[:, [5,12]]
+# y = wine.target
 
 n = len(X)  # data length
 xl = np.arange(n)  # data indexes
 
 eps = 1e-5
-alpha = 0.9
-tetta = 0.2
+alpha = 0.5
+tetta = 0.1
 
-#substraction of two sets
+# substraction of two sets
 def sets_diff(a1, a2):
     a1 = np.atleast_1d(a1)
     a2 = np.atleast_1d(a2)
@@ -32,7 +35,7 @@ def sets_diff(a1, a2):
         return a1
     return np.setdiff1d(a1,a2)
 
-#union of two sets
+# union of two sets
 def sets_union(a1, a2):
     a1 = np.atleast_1d(a1)
     a2 = np.atleast_1d(a2)
@@ -42,58 +45,59 @@ def sets_union(a1, a2):
         return a1
     return np.union1d(a1,a2)
 
-#fris-function
+# fris-function
 def fris(a, b, x):
     return (distance.euclidean(a, x) - distance.euclidean(a, b)) / (distance.euclidean(a, x) + distance.euclidean(a, b) + eps)
 
-#returns nearest to u object from U
+# returns nearest to u object from U
 def nearest_neighbor(u, U):
     nbrs = NearestNeighbors(n_neighbors=1)
     nbrs.fit(U)
     return U[nbrs.kneighbors(u, return_distance=False)]
 
-#return new etalon (index) for Y class based on existing etalons 'etalons' and set of Xy elements of Y class
+# return new etalon (index) for Y class based on existing etalons 'etalons' and set of Xy elements of Y class
 def find_etalon(Xy, etalons):
     length = len(Xy)
     if length == 1:
         return Xy[0]
-	#get etalons values by indexes
-    etalonsVal = []
+    # get etalons values by indexes
+    etalons_val = []
     for i in etalons:
-        etalonsVal.append(X[i])
-    etalonsVal = np.asarray(etalonsVal)
+        etalons_val.append(X[i])
+    etalons_val = np.asarray(etalons_val)
     D, T, E = [], [], []
     i = 0
-    arrDiff = sets_diff(xl, Xy) #X/Xy
+    arrDiff = sets_diff(xl, Xy)  # X/Xy
     for x in range(length):
-        #defence
+        # defence
         sum = 0
         for u in range(length):
             if u == x:
                 continue
-            sum = sum + fris(X[Xy[u]], X[Xy[x]], nearest_neighbor(np.reshape(X[Xy[u]], (1,-1)), etalonsVal))
-        #defence
+            sum = sum + fris(X[Xy[u]], X[Xy[x]], nearest_neighbor(np.reshape(X[Xy[u]], (1,-1)), etalons_val))
+        # defence
         D.append(sum/(len(Xy) - 1))
 
         # tolerance
         sum = 0
         for v in range(len(arrDiff)):
-            sum = sum + fris(X[arrDiff[v]], X[Xy[x]], nearest_neighbor(np.reshape(X[arrDiff[v]], (1,-1)), etalonsVal))
-        #tolerance
+            sum = sum + fris(X[arrDiff[v]], X[Xy[x]], nearest_neighbor(np.reshape(X[arrDiff[v]], (1,-1)), etalons_val))
+        # tolerance
         T.append(sum/(len(arrDiff)))
 
         # efficiency
         E.append(alpha*D[i] + (1-alpha)*T[i])
 
         i = i + 1
-    return Xy[np.argmax((E))] #index from Xy
+    return Xy[np.argmax((E))]  # index from Xy
+
 
 def fris_stolp():
     xByClass = []
     for i in np.unique(y):
-        xByClass.append(np.arange(n)[y==i])
+        xByClass.append(np.arange(n)[y == i])
 
-    #step1: finding etalon0
+    # step1: finding etalon0
     etalon0 = []
     for i in (np.unique(y)):
         etalon0.append(find_etalon(xByClass[i], sets_diff(xl, xByClass[i])))
@@ -101,7 +105,7 @@ def fris_stolp():
     print("Initial etalons:")
     print(etalon0)
 
-    #step2: initializing etalons for all classes
+    # step2: initializing etalons for all classes
     etalonsUnion = []
     for i in (np.unique(y)):
         etalonsUnion = sets_union(etalonsUnion, etalon0[i])
@@ -112,34 +116,34 @@ def fris_stolp():
     print("etalons:")
     print(etalons)
 
-    #step3: repeat steps4-6 untill X is not empty
-    etalonsList = [] #use this trick for comfortable array substaction
+    # step3: repeat steps4-6 untill X is not empty
+    etalonsList = []  # use this trick for comfortable array substaction
     for i in (np.unique(y)):
         etalonsList = sets_union(etalonsList, etalons[i])
 
     xIndexes = xl
     while (len(xIndexes)):
-        #step4: initialize correct obj
+        # step4: initialize correct obj
         correct = []
         for i in range(len(xIndexes)):
-            index = xIndexes[i] #elemet index
+            index = xIndexes[i]  # elemet index
             x = X[index]
             yClass = y[index]
 
-			#values of etalons for specific class
+            # values of etalons for specific class
             etalonsYVal = []
             for j in np.atleast_1d(etalons[yClass]):
                 etalonsYVal.append(X[j])
             etalonsYVal = np.asarray(etalonsYVal)
 
-			#values of etalons for another classes
-            etalonsDif = sets_diff(etalonsList, etalons[yClass])
-            etalonsVal = []
-            for j in np.atleast_1d(etalonsDif):
-                etalonsVal.append(X[j])
-            etalonsVal = np.asarray(etalonsVal)
+            # values of etalons for another classes
+            etalons_dif = sets_diff(etalonsList, etalons[yClass])
+            etalons_val = []
+            for j in np.atleast_1d(etalons_dif):
+                etalons_val.append(X[j])
+            etalons_val = np.asarray(etalons_val)
 
-            val = fris(x, nearest_neighbor(np.reshape(x, (1,-1)), etalonsYVal), nearest_neighbor(np.reshape(x, (1,-1)), etalonsVal))
+            val = fris(x, nearest_neighbor(np.reshape(x, (1,-1)), etalonsYVal), nearest_neighbor(np.reshape(x, (1,-1)), etalons_val))
             if (val > tetta):
                 correct.append(index)
         print("correct")
@@ -147,12 +151,12 @@ def fris_stolp():
         if (not len(correct)):
             break
 
-        #step5: delete correct from xByClass and xIndexes
+        # step5: delete correct from xByClass and xIndexes
         for i in np.unique(y):
             xByClass[i] = sets_diff(xByClass[i], correct)
         xIndexes = sets_diff(xIndexes, correct)
 
-        #step6: add new etalon for each class
+        # step6: add new etalon for each class
         for i in np.unique(y):
             if (len(xByClass[i])):
                 etalons[i] = sets_union(etalons[i], find_etalon(xByClass[i], sets_diff(etalonsList,etalons[i])))
@@ -175,5 +179,11 @@ colors = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
 plt.scatter(X[:,0], X[:,1], c=y, cmap=colors, s=30)
 plt.scatter(X[etalons,0], X[etalons,1], c=y[etalons], cmap=colors, s=300)
 # plt.title("Etalons for iris flower data set with alpha = %f" % alpha)
-plt.title("Etalons for wine data set with alpha = %f" % alpha)
+plt.title("Etalons for iris data set with alpha = %f" % alpha)
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+red_patch = mpatches.Patch(color="red", label="Setosa")
+green_patch = mpatches.Patch(color="green", label="Versicolor")
+blue_patch = mpatches.Patch(color="blue", label="Virginica")
+plt.legend(handles=[red_patch, green_patch, blue_patch])
 plt.show()
