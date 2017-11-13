@@ -10,19 +10,45 @@ sklearn.neighbors предоставляет необходимый функци
 
 ###### Пример нахождения ближайших соседей между двумя наборами данных:
 ```python
-X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
-nbrs = NearestNeighbors(n_neighbors=2, algorithm='auto').fit(X)
-distances, indices = nbrs.kneighbors(X)
+>>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+>>> nbrs = NearestNeighbors(n_neighbors=2, algorithm='auto').fit(X)
+>>> distances, indices = nbrs.kneighbors(X)
+>>> indices                                           
+array([[0, 1],
+       [1, 0],
+       [2, 1],
+       [3, 4],
+       [4, 3],
+       [5, 4]]...)
+>>> distances
+array([[ 0.        ,  1.        ],
+       [ 0.        ,  1.        ],
+       [ 0.        ,  1.41421356],
+       [ 0.        ,  1.        ],
+       [ 0.        ,  1.        ],
+       [ 0.        ,  1.41421356]])
 ```
 *где indices - индексы ближайших точек, distances - массив, хранящицй расстояния до точек.*
 
 Также, для нахождения ближайших соседей можно использовать классы KDTree и BallTree.
 ```python
-X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
-kdt = KDTree(X, leaf_size=30, metric='euclidean') 
-kdt.query(X, k=2, return_distance=False)  
-blt = BallTree(X, leaf_size=30, metric='euclidean') 
-blt.query(X, k=2, return_distance=True)  
+>>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+>>> kdt = KDTree(X, leaf_size=30, metric='euclidean') 
+>>> kdt.query(X, k=2, return_distance=False) 
+array([[0, 1],
+       [1, 0],
+       [2, 1],
+       [3, 4],
+       [4, 3],
+       [5, 4]]) 
+>>> blt = BallTree(X, leaf_size=30, metric='euclidean') 
+>>> blt.query(X, k=2, return_distance=False) 
+array([[0, 1],
+       [1, 0],
+       [2, 1],
+       [3, 4],
+       [4, 3],
+       [5, 4]]) 
 ```
 
 ### *Классификация методом ближайших соседей*
@@ -107,7 +133,7 @@ KNeighborsClassifier(n_neighbors=5, weights=’uniform’, algorithm=’auto’,
 	* sample_weight - массив весов образцов.
 * set_params(params) - задает параметры оценки.
 
-### Алгоритмы ближайших соседей
+### Алгоритмы поиска ближайших соседей
 * Brute Force (метод перебора). Вычисление расстояний между всеми парами точек в наборе данных: для N образцов в D-измерениях этот подход имеет сложность **O[DN^2]**. Эффективные поиски соседей  перебором могут быть очень конкурентоспособными для небольших выборок данных. Однако по мере роста количества образцов N данный подход становится неосуществимым. 
 * KDTree (K-мерное дерево). Основная идея заключается в том, что если точка A очень далека от точки B, а точка B очень близка к точке C, то мы знаем, что точки A и C очень далеки, без явного расчета их расстояния. 
 Таким образом, вычислительная сложность поиска ближайших соседей может быть сведена к **O[DNlog(N)]**.
@@ -122,6 +148,6 @@ BallTree рекурсивно делит данные на узлы, опред�
 
 ### Ссылки
 
-1. http://scikit-learn.org/stable/modules/neighbors.html
-2. http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
-3. http://www.machinelearning.ru/wiki/index.php?title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B3%D0%BE_%D1%81%D0%BE%D1%81%D0%B5%D0%B4%D0%B0
+1. Nearest Neighbors - scikit-learn documentation http://scikit-learn.org/stable/modules/neighbors.html
+2. sklearn.neighbors.KNeighborsClassifier - scikit-learn documentation http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
+3. Метод ближайших соседей http://www.machinelearning.ru/wiki/index.php?title=%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B5%D0%B3%D0%BE_%D1%81%D0%BE%D1%81%D0%B5%D0%B4%D0%B0

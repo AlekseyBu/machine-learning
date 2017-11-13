@@ -4,25 +4,26 @@ import matplotlib.patches as mpatches
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 from sklearn.neighbors import NearestNeighbors
+from sklearn.neighbors import KNeighborsClassifier
 from scipy.spatial import distance
 
 
-iris = datasets.load_iris()
-# take two features
-X = iris.data[:, [2, 3]]
-y = iris.target
+# iris = datasets.load_iris()
+# # take two features
+# X = iris.data[:, [2, 3]]
+# y = iris.target
 
-# wine = datasets.load_wine()
-# # take the first two features
-# # X = wine.data[:, [6,9]]
+wine = datasets.load_wine()
+# take the first two features
+X = wine.data[:, [6,9]]
 # X = wine.data[:, [5,12]]
-# y = wine.target
+y = wine.target
 
 n = len(X)  # data length
 xl = np.arange(n)  # data indexes
 
 eps = 1e-5
-alpha = 0.5
+alpha = 0.7
 tetta = 0.1
 
 # substraction of two sets
@@ -169,21 +170,91 @@ def fris_stolp():
 
     return etalons
 
-ans = fris_stolp()
+# ans = fris_stolp()
+# ans = [39, [66, 77, 98], [101, 106, 119]]
+# ans =  [[ 8, 21, 43], [ 73,  74,  78,  81,  86,  87,  89, 112, 129], [133, 142, 150, 151, 175]]
+ans = [[35, 38, 49], [ 61,  65,  66,  98, 113, 121, 126], [145, 162, 175]]
 print("final etalons:")
 print(ans)
+
 etalons = []
 for i in np.unique(y):
     etalons = sets_union(etalons, ans[i])
-colors = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
-plt.scatter(X[:,0], X[:,1], c=y, cmap=colors, s=30)
-plt.scatter(X[etalons,0], X[etalons,1], c=y[etalons], cmap=colors, s=300)
-# plt.title("Etalons for iris flower data set with alpha = %f" % alpha)
-plt.title("Etalons for iris data set with alpha = %f" % alpha)
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal Width")
-red_patch = mpatches.Patch(color="red", label="Setosa")
-green_patch = mpatches.Patch(color="green", label="Versicolor")
-blue_patch = mpatches.Patch(color="blue", label="Virginica")
-plt.legend(handles=[red_patch, green_patch, blue_patch])
-plt.show()
+etalons_persentage = 100*len(etalons)/len(y)
+
+def print_plot(X, Y, dataset, xlabel, ylabel, features, check, x_test, y_test) :
+    colors = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
+    plt.scatter(X[:,0], X[:,1], c=y, cmap=colors, s=30)
+    plt.scatter(X[etalons,0], X[etalons,1], c=y[etalons], cmap=colors, s=300)
+    plt.title("Etalons (%.2f%% of all dataset) for %s data set with alpha = %f" %
+              (etalons_persentage, dataset, alpha))
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    red_patch = mpatches.Patch(color="red", label=features[0])
+    green_patch = mpatches.Patch(color="green", label=features[1])
+    blue_patch = mpatches.Patch(color="blue", label=features[2])
+    plt.legend(handles=[red_patch, green_patch, blue_patch])
+
+    if (check):
+        colors = ListedColormap(['#FFFF00', '#FFFF00', '#FFFF00'])
+        plt.scatter(x_test[:, 0], x_test[:, 1], c=y_test, cmap=colors, s=30)
+    plt.show()
+
+# print_plot(X, y, 'iris flower', 'Sepal Length', 'Sepal Width', ['Setosa', 'Versicolor', 'Virginica'], False, None, None)
+# print_plot(X, y, 'wine', 'Phenols', 'Proline', ['Class1', 'Class2', 'Class3'], False, None, None)
+print_plot(X, y, 'wine', 'Flavonoids', 'Color int', ['Class1', 'Class2', 'Class3'], False, None, None)
+
+# calculate quality
+
+# test data for iris
+# x1 = [[1, 0.1], [1.23, 1.3], [1.5, 0.4], [2.62, 0.4], [1.37, 0.8]]
+# x2 = [[3.17, 0.89], [4.1, 1.1], [3.5, 1.7], [4.9, 1.26], [5.5, 1.2]]
+# x3 = [[6, 2], [7, 1.6], [6.5, 1.5], [5, 2], [4.5, 2.2]]
+# y_test = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+
+
+# # test data for wine
+# x1 = [[3.5,1400], [2.5,1202], [3,1000], [3.8,1210], [3.3,1300]]
+# x2 = [[1.8,300], [2.0, 400], [2.8, 400], [3.5, 600], [3.8, 700]]
+# x3 = [[1.2, 380], [1.3, 700], [1.4, 780], [1.5, 650], [1.7, 830]]
+# y_test = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+
+# test data for wine
+x1 = [[3.5, 9], [2.5, 8], [3, 5], [4, 8.3], [3.3, 10]]
+x2 = [[1, 2], [2, 3], [2.8, 2], [3.5, 3], [5, 4]]
+x3 = [[1, 10], [1.3, 12], [0.5, 8], [1.8, 9], [0.3, 4]]
+y_test = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+
+x_test = x1+x2+x3
+x_test = np.array(x_test)
+
+# print_plot(X, y, 'iris flower', 'Sepal Length', 'Sepal Width', ['Setosa', 'Versicolor', 'Virginica'], True, x_test, y_test)
+# print_plot(X, y, 'wine', 'Phenols', 'Proline', ['Class1', 'Class2', 'Class3'], True, x_test, y_test)
+print_plot(X, y, 'wine', 'Flavonoids', 'Color int', ['Class1', 'Class2', 'Class3'], True, x_test, y_test)
+
+def calc_quality(X, y, x_test, y_test):
+    neigh = KNeighborsClassifier(n_neighbors=2)
+    neigh.fit(X, y)
+    sum = len(x_test)
+    for i, val in enumerate(x_test):
+        # print(neigh.predict(np.reshape(val, (1,2))), y_test[i])
+        # print(neigh.predict_proba(np.reshape(val, (1, 2))))
+        if (neigh.predict(np.reshape(val, (1,2))) != y_test[i]):
+            sum = sum - 1
+    quality = sum/len(x_test)
+    return quality
+
+# for all dataset
+quality = calc_quality(X, y, x_test, y_test)
+print("Classification quality for all dataset = %.2f" % quality)
+
+# for etalons
+x_etalons = []
+y_etalons = []
+for val in etalons:
+    x_etalons.append([X[val, 0], X[val, 1]])
+    y_etalons.append(y[val])
+
+quality = calc_quality(x_etalons, y_etalons, x_test, y_test)
+print("Classification quality for etalons dataset = %.2f" % quality)
+

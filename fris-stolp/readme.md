@@ -15,6 +15,19 @@
 ###### Пример работы алгоритма **FRiS-STOLP**:
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_05_01.png)
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_07_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_quality.png)
+
+Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.93, при эталонах = 0.80
+
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_quality_1.png)
+
+Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.77, при эталонах = 0.70
+
+
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_quality_2.png)
+
+Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.99, при эталонах = 0.60
+
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_09_01.png)
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_01.png)
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_01.png)
@@ -27,5 +40,5 @@
 
 ### Ссылки
 
-1. http://www.machinelearning.ru/wiki/index.php?title=%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_FRiS-%D0%A1%D0%A2%D0%9E%D0%9B%D0%9F
-2. http://www.machinelearning.ru/wiki/index.php?title=FRiS-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F
+1. Алгоритм FRiS-STOLP http://www.machinelearning.ru/wiki/index.php?title=%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_FRiS-%D0%A1%D0%A2%D0%9E%D0%9B%D0%9F
+2. FRiS-функция  http://www.machinelearning.ru/wiki/index.php?title=FRiS-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F
