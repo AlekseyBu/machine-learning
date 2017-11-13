@@ -19,20 +19,21 @@
 
 Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.93, при эталонах = 0.80
 
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_09_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_01.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_01.png)
+
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_quality_1.png)
 
 Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.77, при эталонах = 0.70
 
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_02.png)
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_02.png)
 
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_quality_2.png)
 
 Качество классификации на тестовых данных (желтые точки) при полной выборке = 0.99, при эталонах = 0.60
 
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/iris_09_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_01.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_05_02.png)
-![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/fris-stolp/img/wine_07_02.png)
 
 Алгоритм FRiS-STOLP создаёт в процессе работы сокращенное описание обучающей выборки. Это позволяет сократить расход памяти, избавиться от ошибок и выбросов, содержащихся в ней, но при этом сохранить информацию, необходимую для дальнейшего распознавания новых объектов.
 
