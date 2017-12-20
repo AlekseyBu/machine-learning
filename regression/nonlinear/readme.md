@@ -1,0 +1,1 @@
+![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/regression/nonlinear/img/exp.png)
