@@ -1,17 +1,17 @@
-Пусть задано пространство объектов X и множество возможных ответов 
+РџСѓСЃС‚СЊ Р·Р°РґР°РЅРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РѕР±СЉРµРєС‚РѕРІ X Рё РјРЅРѕР¶РµСЃС‚РІРѕ РІРѕР·РјРѕР¶РЅС‹С… РѕС‚РІРµС‚РѕРІ 
 ![equation](https://latex.codecogs.com/gif.latex?$&space;Y&space;=&space;\mathbb{R}&space;$). 
-Существует неизвестная зависимость ![equation](https://latex.codecogs.com/gif.latex?$y^*:X&space;\rightarrow&space;Y$), значения которой известны только на объектах обучающией выборки ![equation](https://latex.codecogs.com/gif.latex?$&space;X^l&space;=&space;(x_i\&amp;amp;amp;amp;amp;amp;space;,\&amp;amp;amp;amp;amp;amp;space;y_i)^l_{i=1},\&amp;amp;amp;amp;amp;amp;space;y_i&space;=&space;y^*(x_i)&space;$). Требуется построить алгоритм ![equation](https://latex.codecogs.com/gif.latex?$&space;a:\&amp;amp;amp;amp;amp;amp;space;X\rightarrow&space;Y&space;$ ) , аппроксимирующий неизвестную зависимость  ![equation](https://latex.codecogs.com/gif.latex?$y^*$) . Предполагается, что на множестве X задана метрика ![equation](https://latex.codecogs.com/gif.latex?\rho(x,x^')).
-В первом подходе используется формула Надарая-Ватсона: 
+РЎСѓС‰РµСЃС‚РІСѓРµС‚ РЅРµРёР·РІРµСЃС‚РЅР°СЏ Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ ![equation](https://latex.codecogs.com/gif.latex?$y^*:X&space;\rightarrow&space;Y$), Р·РЅР°С‡РµРЅРёСЏ РєРѕС‚РѕСЂРѕР№ РёР·РІРµСЃС‚РЅС‹ С‚РѕР»СЊРєРѕ РЅР° РѕР±СЉРµРєС‚Р°С… РѕР±СѓС‡Р°СЋС‰РёРµР№ РІС‹Р±РѕСЂРєРё ![equation](https://latex.codecogs.com/gif.latex?$&space;X^l&space;=&space;(x_i\&amp;amp;amp;amp;amp;amp;space;,\&amp;amp;amp;amp;amp;amp;space;y_i)^l_{i=1},\&amp;amp;amp;amp;amp;amp;space;y_i&space;=&space;y^*(x_i)&space;$). РўСЂРµР±СѓРµС‚СЃСЏ РїРѕСЃС‚СЂРѕРёС‚СЊ Р°Р»РіРѕСЂРёС‚Рј ![equation](https://latex.codecogs.com/gif.latex?$&space;a:\&amp;amp;amp;amp;amp;amp;space;X\rightarrow&space;Y&space;$ ) , Р°РїРїСЂРѕРєСЃРёРјРёСЂСѓСЋС‰РёР№ РЅРµРёР·РІРµСЃС‚РЅСѓСЋ Р·Р°РІРёСЃРёРјРѕСЃС‚СЊ  ![equation](https://latex.codecogs.com/gif.latex?$y^*$) . РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ РЅР° РјРЅРѕР¶РµСЃС‚РІРµ X Р·Р°РґР°РЅР° РјРµС‚СЂРёРєР° ![equation](https://latex.codecogs.com/gif.latex?\rho(x,x^')).
+Р’ РїРµСЂРІРѕРј РїРѕРґС…РѕРґРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С„РѕСЂРјСѓР»Р° РќР°РґР°СЂР°СЏ-Р’Р°С‚СЃРѕРЅР°: 
 ![equation](https://latex.codecogs.com/gif.latex?a_h(x;X^l)&space;=&space;\frac{\sum_{i=1}^{l}&space;y_i\omega_i(x)}{\sum_{i=1}^{l}&space;\omega_i(x)}&space;=&space;\frac{\sum_{i=1}^{l}&space;y_iK\left(\frac{\rho(x,x_i)}{h}&space;\right&space;)}{\sum_{i=1}^{l}&space;K\left(\frac{\rho(x,x_i)}{h}&space;\right&space;)})
 
-Однако, данный подход слишком чувствителен к выбросам. 
-Отсюда идея: домножать веса на коэффициенты  
+РћРґРЅР°РєРѕ, РґР°РЅРЅС‹Р№ РїРѕРґС…РѕРґ СЃР»РёС€РєРѕРј С‡СѓРІСЃС‚РІРёС‚РµР»РµРЅ Рє РІС‹Р±СЂРѕСЃР°Рј. 
+РћС‚СЃСЋРґР° РёРґРµСЏ: РґРѕРјРЅРѕР¶Р°С‚СЊ РІРµСЃР° РЅР° РєРѕСЌС„С„РёС†РёРµРЅС‚С‹  
 ![equation](https://latex.codecogs.com/gif.latex?$&space;\delta_t&space;=\bar{K}(\hat{\varepsilon_t})&space;$) , 
-где  ![equation](https://latex.codecogs.com/gif.latex?\hat{\varepsilon_t}=&space;\|&space;\hat{y_t}&space;-&space;y_t&space;\|) . 
-Такой процесс называется локально взвешенным сглаживанием (Lowess): 
+РіРґРµ  ![equation](https://latex.codecogs.com/gif.latex?\hat{\varepsilon_t}=&space;\|&space;\hat{y_t}&space;-&space;y_t&space;\|) . 
+РўР°РєРѕР№ РїСЂРѕС†РµСЃСЃ РЅР°Р·С‹РІР°РµС‚СЃСЏ Р»РѕРєР°Р»СЊРЅРѕ РІР·РІРµС€РµРЅРЅС‹Рј СЃРіР»Р°Р¶РёРІР°РЅРёРµРј (Lowess): 
 ![equation](https://latex.codecogs.com/gif.latex?a(x_t;&space;X\setminus\{&space;x_t\})&space;=&space;\frac{&space;\sum_{i=1,&space;i\neq&space;t&space;}^{m}&space;{y_i&space;\delta_i&space;K\left(&space;\frac{\rho(x_i,x_t)}{h(x_t)}\right)}&space;}&space;{\sum_{i=1,&space;i\neq&space;t&space;}^{m}&space;{y_i&space;K\left(&space;\frac{\rho(x_i,x_t)}{h(x_t)}\right)}&space;}) 
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/regression/lowess/img/Nadaray_Lowess_difference.JPG)
 
-На данном графике видно, что lowess сглаживает лучше (при параметре ширины окна h = 0.5)
+РќР° РґР°РЅРЅРѕРј РіСЂР°С„РёРєРµ РІРёРґРЅРѕ, С‡С‚Рѕ lowess СЃРіР»Р°Р¶РёРІР°РµС‚ Р»СѓС‡С€Рµ (РїСЂРё РїР°СЂР°РјРµС‚СЂРµ С€РёСЂРёРЅС‹ РѕРєРЅР° h = 0.5)
 
 ![](https://raw.githubusercontent.com/elvinayakubova/machine-learning/master/regression/lowess/img/Lowess_1.JPG)
